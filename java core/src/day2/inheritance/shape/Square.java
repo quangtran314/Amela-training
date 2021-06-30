@@ -1,4 +1,4 @@
-package day2.inheritance;
+package day2.inheritance.shape;
 
 public class Square extends Rectangle {
     public Square() {

@@ -1,4 +1,4 @@
-package day2.inheritance;
+package day2.inheritance.shape;
 
 public class Rectangle extends Shape {
     private double width = 1.0;

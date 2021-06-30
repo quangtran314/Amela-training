@@ -1,4 +1,4 @@
-package day2.inheritance;
+package day2.inheritance.shape;
 
 public class Circle extends Shape {
     private double radius = 1.0;
