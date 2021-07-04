@@ -5,6 +5,10 @@ public class TennisGame {
     static String PLAYER2_ADVANTAGE = "Advantage player2";
     static String PLAYER1_WIN = "Win for player1";
     static String PLAYER2_WIN = "Win for player2";
+    static final int LOVE = 0;
+    static final int FIFTEEN = 1;
+    static final int THIRTY = 2;
+    static final int FORTY = 3;
 
     public static String getScore(String player1Name, String player2Name, int player1Score, int player2Score) {
         boolean isDeuce = player1Score == player2Score;
@@ -38,16 +42,16 @@ public class TennisGame {
         String score = "";
 
         switch (playerScore) {
-            case 0:
+            case LOVE:
                 score = "Love-All";
                 break;
-            case 1:
+            case FIFTEEN:
                 score = "Fifteen-All";
                 break;
-            case 2:
+            case THIRTY:
                 score = "Thirty-All";
                 break;
-            case 3:
+            case FORTY:
                 score = "Forty-All";
                 break;
             default:
@@ -73,16 +77,16 @@ public class TennisGame {
             }
 
             switch(tempScore) {
-                case 0:
+                case LOVE:
                     score += "Love";
                     break;
-                case 1:
+                case FIFTEEN:
                     score += "Fifteen";
                     break;
-                case 2:
+                case THIRTY:
                     score += "Thirty";
                     break;
-                case 3:
+                case FORTY:
                     score += "Forty";
                     break;
             }
