@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="calculator">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/calculator_jar/calculator.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="jar://$PROJECT_DIR$/out/artifacts/calculator_jar/calculator.jar!/" recursive="false" />
+  </library>
+</component>

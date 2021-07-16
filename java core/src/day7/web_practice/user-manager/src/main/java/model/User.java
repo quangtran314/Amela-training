@@ -1,5 +1,10 @@
 package model;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 public class User {
     protected int id;
     protected String name;
@@ -23,12 +28,15 @@ public class User {
         this.country = country;
     }
 
+    @Min(1)
     public int getId() {
         return id;
     }
     public void setId(int id) {
         this.id = id;
     }
+
+    @NotEmpty
     public String getName() {
         return name;
     }

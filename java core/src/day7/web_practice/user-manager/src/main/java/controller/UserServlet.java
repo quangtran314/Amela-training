@@ -6,9 +6,14 @@ import model.User;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet(name = "UserServlet", value = "/users")
 public class UserServlet extends HttpServlet {
@@ -108,14 +113,31 @@ public class UserServlet extends HttpServlet {
     }
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
+        User user = new User(name, email, country);
 
-        User newUser = new User(name, email, country);
-        userDAO.insertUser(newUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
-        dispatcher.forward(request, response);
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
+        if (!constraintViolations.isEmpty()) {
+            String errors = "<ul>";
+            for (ConstraintViolation<User> constraintViolation : constraintViolations) {
+                errors += "<li>" + constraintViolation.getPropertyPath() + " " + constraintViolation.getMessage()
+                        + "</li>";
+            }
+            errors += "</ul>";
+            request.setAttribute("user", user);
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("user/create.jsp").forward(request, response);
+        } else {
+            userDAO.insertUser(user);
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("user/create.jsp").forward(request, response);
+
+        }
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
